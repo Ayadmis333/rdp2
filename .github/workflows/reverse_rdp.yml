@@ -6,10 +6,11 @@ jobs:
   build:
 
     runs-on: windows-latest
+    timeout-minutes: 720
 
     steps:
     - name: Download
-      run: Invoke-WebRequest https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
+    - run: Invoke-WebRequest https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
     - name: Extract
       run: Expand-Archive ngrok.zip
     - name: Auth
@@ -22,6 +23,12 @@ jobs:
     - run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
     - run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "P@ssw0rd!" -Force)
     - name: Create Tunnel
-      run: .\ngrok\ngrok.exe tcp 3389
-      
-    
+      timeout-minutes: 1
+      run: Start-Process Powershell -ArgumentList '-Noexit -Command ".\ngrok\ngrok.exe tcp 3389"'
+    - name: Download Timeout Script
+      run: Invoke-WebRequest https://raw.githubusercontent.com/Nelzd/timeout.ps1/main/timeout.ps1 -OutFile timeout.ps1
+    - name: Keep Alive
+      timeout-minutes: 1
+      run: ./timeout.ps1
+
+
