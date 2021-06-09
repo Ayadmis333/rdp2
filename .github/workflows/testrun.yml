@@ -6,6 +6,7 @@ jobs:
   build:
 
     runs-on: windows-latest
+    timeout-minutes: 720
 
     steps:
     - name: Download
@@ -26,7 +27,6 @@ jobs:
     - name: Download Timeout Script
       run: Invoke-WebRequest https://raw.githubusercontent.com/Nelzd/timeout.ps1/main/timeout.ps1 -OutFile timeout.ps1
     - name: Keep Alive
-      timeout-minutes: 1
       run: ./timeout.ps1
       
     
