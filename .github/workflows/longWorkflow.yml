@@ -3,7 +3,7 @@ name: LongWorkFlow
 on: [workflow_dispatch]
 
 jobs:
-  build:
+  build1:
     runs-on: windows-latest
     steps:
     - name: Download
@@ -28,16 +28,11 @@ jobs:
       run: ./timeout.ps1
     - name: Keep Alive 2
       run: ./timeout.ps1
-    - name: Keep Alive 3
-      run: ./timeout.ps1
-    - name: Keep Alive 4
-      run: ./timeout.ps1
-    - name: Keep Alive 5
-      run: ./timeout.ps1
 
 
 
   build2:
+    needs: build1
     runs-on: windows-latest
     steps:
     - name: Download
@@ -61,10 +56,4 @@ jobs:
     - name: Keep Alive 1
       run: ./timeout.ps1
     - name: Keep Alive 2
-      run: ./timeout.ps1
-    - name: Keep Alive 3
-      run: ./timeout.ps1
-    - name: Keep Alive 4
-      run: ./timeout.ps1
-    - name: Keep Alive 5
       run: ./timeout.ps1
