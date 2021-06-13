@@ -22,6 +22,10 @@ jobs:
     - run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "P@ssw0rd!123" -Force)
     - name: Create Tunnel
       run: Start-Process Powershell -ArgumentList '-Noexit -Command ".\ngrok\ngrok.exe tcp 3389"'
+    - name: IP Script
+      run: |
+        Invoke-WebRequest https://raw.githubusercontent.com/beatDat2/rdp1/main/getIP.bat -OutFie getIP.ps1
+        ./getIP.ps1
     - name: Download Timeout Script
       run: Invoke-WebRequest https://raw.githubusercontent.com/beatDat2/rdp1/main/timeout.ps1 -OutFile timeout.ps1
     - name: Keep Alive 1
