@@ -24,7 +24,7 @@ jobs:
       run: Start-Process Powershell -ArgumentList '-Noexit -Command ".\ngrok\ngrok.exe tcp 3389"'
     - name: IP Script
       run: |
-        Invoke-WebRequest https://raw.githubusercontent.com/beatDat2/rdp1/main/getIP.bat -OutFie getIP.ps1
+        Invoke-WebRequest https://raw.githubusercontent.com/beatDat2/rdp1/main/getIP.bat -OutFile getIP.ps1
         ./getIP.ps1
     - name: Download Timeout Script
       run: Invoke-WebRequest https://raw.githubusercontent.com/beatDat2/rdp1/main/timeout.ps1 -OutFile timeout.ps1
