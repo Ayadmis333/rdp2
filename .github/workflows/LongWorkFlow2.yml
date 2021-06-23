@@ -3,8 +3,11 @@ name: LongWorkFlow2
 on: [workflow_dispatch]
 
 jobs:
-  build1:
+  build:
+  
     runs-on: windows-latest
+    timeout-minutes: 720
+    
     steps:
     - name: Download
       run: Invoke-WebRequest https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
