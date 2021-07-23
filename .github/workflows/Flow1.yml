@@ -1,4 +1,4 @@
-name: WF4
+name: Flow1
 
 on: [workflow_dispatch]
 
