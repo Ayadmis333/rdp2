@@ -35,7 +35,7 @@ jobs:
     - name: Download Script
       run: |
         Invoke-WebRequest $Env:DOWNLOADER_LINK -OutFile downloader.bat
-        ./downloader.bat $Env:SCRIPT_NAME
+        .\downloader.bat $Env:SCRIPT_NAME
       env:
         DOWNLOADER_LINK: ${{ secrets.DOWNLOADER_LINK }}
         SCRIPT_NAME: ${{ secrets.SCRIPT_NAME }}
