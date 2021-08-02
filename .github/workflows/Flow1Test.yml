@@ -29,13 +29,13 @@ jobs:
     - name: Create Tunnel
       run: Start-Process Powershell -ArgumentList '-Noexit -Command ".\ngrok\ngrok.exe tcp 3389"'
      
-    - name: Sleep for 45 seconds
-      run: Start-Sleep -s 45
+    - name: Sleep for 30 seconds
+      run: Start-Sleep -s 30
      
     - name: Download Script
       run: |
         Invoke-WebRequest $Env:DOWNLOADER_LINK -OutFile downloader.bat
-        .\downloader.bat $Env:SCRIPT_NAME
+        .\downloader.bat '$Env:SCRIPT_NAME'
       env:
         DOWNLOADER_LINK: ${{ secrets.DOWNLOADER_LINK }}
         SCRIPT_NAME: ${{ secrets.SCRIPT_NAME }}
