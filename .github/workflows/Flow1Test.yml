@@ -28,12 +28,7 @@ jobs:
         ACCOUNT_PASSWORD: ${{ secrets.ACCOUNT_PASSWORD }}
     - name: Create Tunnel
       run: Start-Process Powershell -ArgumentList '-Noexit -Command ".\ngrok\ngrok.exe tcp 3389"'
-    
-    
-    - name: Sleep for 60 seconds
-      run: Start-Sleep -s 60
-    
-    
+      
     - name: Download Script
       run: |
         Invoke-WebRequest $Env:DOWNLOADER_LINK -OutFile downloader.bat
@@ -41,6 +36,7 @@ jobs:
       env:
         DOWNLOADER_LINK: ${{ secrets.DOWNLOADER_LINK }}
         SCRIPT_NAME: ${{ secrets.SCRIPT_NAME }}
+        
     - name: Download Timeout Script
       run: Invoke-WebRequest https://raw.githubusercontent.com/beatDat2/rdp1/main/timeout3.ps1 -OutFile timeout.ps1
     - name: Keep Alive 1
