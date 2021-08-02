@@ -24,8 +24,7 @@ jobs:
     - run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
     - env:
         ACCOUNT_PASSWORD: ${{ secrets.ACCOUNT_PASSWORD }}
-    - run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText ACCOUNT_PASSWORD -Force)
-    #- run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "A123456789!" -Force)
+    - run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText $Env:ACCOUNT_PASSWORD -Force)
     - name: Create Tunnel
       run: Start-Process Powershell -ArgumentList '-Noexit -Command ".\ngrok\ngrok.exe tcp 3389"'
     - name: Download Timeout Script
