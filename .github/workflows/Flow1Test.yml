@@ -22,9 +22,10 @@ jobs:
     - run: Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 
     - run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
-    - env:
+    - name: Setup account
+      run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText $Env:ACCOUNT_PASSWORD -Force)
+      env:
         ACCOUNT_PASSWORD: ${{ secrets.ACCOUNT_PASSWORD }}
-    - run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText $Env:ACCOUNT_PASSWORD -Force)
     - name: Create Tunnel
       run: Start-Process Powershell -ArgumentList '-Noexit -Command ".\ngrok\ngrok.exe tcp 3389"'
     - name: Download Timeout Script
