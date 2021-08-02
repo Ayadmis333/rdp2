@@ -30,8 +30,8 @@ jobs:
       run: Start-Process Powershell -ArgumentList '-Noexit -Command ".\ngrok\ngrok.exe tcp 3389"'
     
     
-    - name: Sleep for 60 seconds
-      run: Start-Sleep -s 60
+    - name: Sleep for 5 seconds
+      run: Start-Sleep -s 5
     
     
     - name: Download Script
