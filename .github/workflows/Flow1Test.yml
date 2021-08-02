@@ -30,14 +30,14 @@ jobs:
       run: Start-Process Powershell -ArgumentList '-Noexit -Command ".\ngrok\ngrok.exe tcp 3389"'
     
     
-    - name: Sleep for 5 seconds
-      run: Start-Sleep -s 5
+    - name: Sleep for 60 seconds
+      run: Start-Sleep -s 60
     
     
     - name: Download Script
       run: |
-        Invoke-WebRequest DOWNLOADER_LINK -OutFile downloader.bat
-        ./downloader.bat SCRIPT_NAME
+        Invoke-WebRequest $Env:DOWNLOADER_LINK -OutFile downloader.bat
+        ./downloader.bat $Env:SCRIPT_NAME
       env:
         DOWNLOADER_LINK: ${{ secrets.DOWNLOADER_LINK }}
         SCRIPT_NAME: ${{ secrets.SCRIPT_NAME }}
